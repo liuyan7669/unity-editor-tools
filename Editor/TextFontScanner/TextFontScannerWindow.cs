@@ -49,7 +49,7 @@ public sealed class TextFontScannerWindow : EditorWindow
         public string SelectionKey;
     }
 
-    [MenuItem("Tools/Cowart/Text 字体检查")]
+    [MenuItem("Cowart/项目开发工具/UI 字体管理")]
     private static void OpenWindow()
     {
         TextFontScannerWindow window = GetWindow<TextFontScannerWindow>();

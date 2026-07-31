@@ -1,6 +1,6 @@
 {
   "name": "com.cowart.editor-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Editor Tools",
   "description": "Unity 编辑器工具集，提供模型文件导出、运行时类调试、源码提取、Text/TMP 字体检查和贴图压缩功能。",
   "unity": "2021.3",

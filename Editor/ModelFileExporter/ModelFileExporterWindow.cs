@@ -73,7 +73,7 @@ public sealed class ModelFileExporterWindow : EditorWindow
         }
     }
 
-    [MenuItem("Tools/Cowart/模型文件导出")]
+    [MenuItem("Cowart/项目开发工具/模型导出")]
     private static void OpenWindow()
     {
         ModelFileExporterWindow window = GetWindow<ModelFileExporterWindow>();

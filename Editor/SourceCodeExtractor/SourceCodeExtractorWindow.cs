@@ -102,7 +102,7 @@ public sealed class SourceCodeExtractorWindow : EditorWindow
         }
     }
 
-    [MenuItem("Tools/Cowart/源码提取工具")]
+    [MenuItem("Cowart/项目开发工具/源码导出")]
     private static void OpenWindow()
     {
         var window = GetWindow<SourceCodeExtractorWindow>();

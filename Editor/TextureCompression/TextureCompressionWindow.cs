@@ -134,7 +134,7 @@ public sealed class TextureCompressionWindow : EditorWindow
         public bool IsGroupHeader => TextureAsset == null;
     }
 
-    [MenuItem("Tools/Cowart/贴图压缩")]
+    [MenuItem("Cowart/项目开发工具/纹理压缩")]
     private static void OpenWindow()
     {
         TextureCompressionWindow window = GetWindow<TextureCompressionWindow>();

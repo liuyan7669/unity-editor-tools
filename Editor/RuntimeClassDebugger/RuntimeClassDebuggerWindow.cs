@@ -18,7 +18,7 @@ public sealed class RuntimeClassDebuggerWindow : EditorWindow
     private int selectedTab;
     private double nextRepaintTime;
 
-    [MenuItem("Tools/Cowart/运行时类调试器")]
+    [MenuItem("Cowart/项目开发工具/运行时对象调试")]
     private static void OpenWindow()
     {
         RuntimeClassDebuggerWindow window = GetWindow<RuntimeClassDebuggerWindow>();

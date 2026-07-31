@@ -1,6 +1,6 @@
 # 源码提取工具
 
-Unity 菜单入口：`Tools > Cowart > 源码提取工具`
+Unity 菜单入口：`Cowart > 项目开发工具 > 源码导出`
 
 ## 功能
 
