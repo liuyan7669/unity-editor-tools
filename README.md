@@ -4,6 +4,32 @@
 
 ## 功能
 
+### 组件剪贴板
+
+- 通过复制、剪切和粘贴三个独立菜单传输物体全部组件
+- `Transform` 或 `RectTransform` 数值会在复制、剪切时记录，并在粘贴时一起覆盖目标
+- 目标存在同类型、同顺序组件时覆盖，不足时自动添加
+- 保留外部资源引用，并将源物体内部组件引用映射到目标对应组件
+- 剪切时更新已加载场景中指向源组件的外部序列化引用
+- 粘贴支持整批 Undo，失败时自动整体回滚
+- 同时提供顶部 Cowart 菜单和 Hierarchy 物体右键 Cowart 子菜单
+
+顶部菜单入口：`Cowart > 组件 > 复制 / 剪切 / 粘贴`
+
+物体右键入口：`Cowart > 组件 > 复制 / 剪切 / 粘贴`
+
+### 项目诊断与批处理
+
+- `引用查找`：查看目标资源的依赖，并反向扫描引用目标的 Assets/Packages 资源
+- `丢失引用扫描`：检查已加载场景、Prefab 和 ScriptableObject 的 Missing Script 与 Missing 引用
+- `场景体检`：检查 Missing Script、丢失引用、EventSystem、AudioListener 和 MainCamera
+- `Prefab Override 管理`：汇总选中 Prefab 实例的 Override，并批量 Apply 或 Revert
+- `选择历史与收藏`：会话内前进/后退选择，并将常用对象收藏到 ProjectSettings
+- `复制资源信息`：复制资源路径、GUID、Hierarchy 路径、类型和程序集
+- `材质批量替换`：替换选中层级或指定目录 Prefab 的 Renderer 材质槽
+
+以上入口统一位于 `Cowart > 项目开发工具`。会写入资源的操作均提供确认；场景批处理支持 Undo，Prefab 资源修改会直接保存。
+
 ### 模型文件导出
 
 - 扫描项目 `Assets` 目录中的模型资源
@@ -71,7 +97,7 @@ com.cowart.editor-tools
 ### 通过 Git URL 安装
 
 ```text
-https://github.com/liuyan7669/unity-editor-tools.git#1.0.1
+https://github.com/liuyan7669/unity-editor-tools.git#1.0.8
 ```
 
 ## 使用方法
@@ -81,6 +107,18 @@ https://github.com/liuyan7669/unity-editor-tools.git#1.0.1
 ```text
 Cowart > 项目开发工具
 ```
+
+### 复制、剪切和粘贴全部组件
+
+1. 在 Hierarchy 中选中源物体。
+2. 执行 `Cowart > 组件 > 复制` 或 `Cowart > 组件 > 剪切`；也可以使用物体右键菜单中的 `Cowart > 组件 > 复制 / 剪切`。
+3. 选中一个或多个目标物体。
+4. 执行 `Cowart > 组件 > 粘贴` 或物体右键菜单中的 `Cowart > 组件 > 粘贴`。
+5. 检查 Console 中的覆盖、添加和引用重映射数量。
+
+当前选中多少个目标物体，就会粘贴多少份；全部目标合并为一次 Undo。`Transform` 和 `RectTransform` 不会从源物体删除，但其位置、旋转、缩放以及 RectTransform 锚点布局数据会随剪贴板一起粘贴。为避免布局数据丢失，源和全部目标必须使用相同的 Transform 类型。同类型其他组件按出现顺序对应，目标上的多余组件不会删除。Prefab 资源需要先进入 Prefab Mode 再操作。
+
+剪切到多个目标时，源组件会在全部目标粘贴成功后统一删除；已加载场景中原本指向源组件的外部引用，由当前活动目标物体（批量列表中的第一个目标）承接。每个目标内部的组件引用仍分别映射到该目标自身。
 
 ### 导出模型文件
 
@@ -134,6 +172,14 @@ Cowart > 项目开发工具
 
 | 类型 | 说明 |
 | --- | --- |
+| `ComponentClipboardMenu` | 通过 Component 和物体右键菜单复制、剪切、粘贴全部组件 |
+| `ReferenceFinderWindow` | 查看资源依赖并反向查找引用资源 |
+| `MissingReferenceScannerWindow` | 扫描场景、Prefab 和 ScriptableObject 的丢失引用 |
+| `SceneValidationWindow` | 检查已加载场景的常见配置问题 |
+| `PrefabOverrideManagerWindow` | 汇总并批量 Apply/Revert Prefab Override |
+| `SelectionHistoryWindow` | 提供选择历史、前进后退与持久收藏 |
+| `AssetInfoWindow` | 复制资源和 Hierarchy 对象的定位信息 |
+| `MaterialReplacerWindow` | 批量替换场景层级或 Prefab 中的材质 |
 | `ModelFileExporterWindow` | 扫描、筛选并导出模型源文件 |
 | `RuntimeClassDebuggerWindow` | 查找和检查 Play Mode 中的运行时对象 |
 | `SourceCodeExtractorWindow` | 合并或按目录结构复制项目源码 |
@@ -143,6 +189,7 @@ Cowart > 项目开发工具
 ## 注意事项
 
 - 本包全部代码只在 Unity Editor 中编译，不会进入 Player 构建。
+- 组件剪切会在粘贴成功后删除源物体上的非 Transform 组件；Transform 始终保留，整次粘贴支持 Undo。
 - 模型导出和源码提取默认不会覆盖已有输出结果。
 - Text 字体批量替换会修改场景或 Prefab，执行前应确认筛选范围。
 - 贴图 Max Size 修改会触发资源重新导入，大批量处理可能需要一定时间。
