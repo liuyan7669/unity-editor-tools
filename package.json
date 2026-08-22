@@ -1,6 +1,6 @@
 {
   "name": "com.cowart.editor-tools",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "displayName": "Editor Tools",
   "description": "Unity 编辑器工具集，提供引用与场景诊断、Prefab 管理、选择收藏、材质替换、组件剪贴板及资源批处理。",
   "unity": "2021.3",
