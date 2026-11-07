@@ -97,7 +97,7 @@ com.cowart.editor-tools
 ### 通过 Git URL 安装
 
 ```text
-https://github.com/liuyan7669/unity-editor-tools.git#1.0.9
+https://github.com/liuyan7669/unity-editor-tools.git#1.0.10
 ```
 
 ## 使用方法
