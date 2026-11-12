@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Cowart.EditorTools.Editor
+namespace Cowart.EditorUtilities.Editor
 {
     /// <summary>在选中层级或指定项目目录的 Prefab 中批量替换 Renderer 材质槽。</summary>
     public sealed class MaterialReplacerWindow : EditorWindow

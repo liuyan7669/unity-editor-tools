@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Cowart.EditorTools.Editor
+namespace Cowart.EditorUtilities.Editor
 {
     /// <summary>查找资源的直接/递归依赖，以及项目中反向引用目标资源的资源。</summary>
     public sealed class ReferenceFinderWindow : EditorWindow

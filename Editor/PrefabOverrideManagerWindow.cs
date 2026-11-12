@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Cowart.EditorTools.Editor
+namespace Cowart.EditorUtilities.Editor
 {
     /// <summary>批量查看、应用和还原当前选择中的 Prefab Instance Override。</summary>
     public sealed class PrefabOverrideManagerWindow : EditorWindow

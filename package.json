@@ -1,7 +1,7 @@
 {
-  "name": "com.cowart.editor-tools",
-  "version": "1.0.10",
-  "displayName": "Editor Tools",
+  "name": "com.cowart.editor-utilities",
+  "version": "2.0.0",
+  "displayName": "Editor Utilities",
   "description": "Unity 编辑器工具集，提供引用与场景诊断、Prefab 管理、选择收藏、材质替换、组件剪贴板及资源批处理。",
   "unity": "2021.3",
   "author": {
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/liuyan7669/unity-editor-tools.git"
+    "url": "https://github.com/liuyan7669/unity-editor-utilities.git"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.2",

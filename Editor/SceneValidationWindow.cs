@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace Cowart.EditorTools.Editor
+namespace Cowart.EditorUtilities.Editor
 {
     /// <summary>检查当前已加载场景中的常见结构和序列化问题。</summary>
     public sealed class SceneValidationWindow : EditorWindow

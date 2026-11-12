@@ -1,0 +1,11 @@
+{
+  "name": "Cowart.EditorUtilities.Editor",
+  "rootNamespace": "Cowart.EditorUtilities.Editor",
+  "references": [
+    "Unity.TextMeshPro",
+    "UnityEngine.UI"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

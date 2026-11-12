@@ -9,8 +9,13 @@ using UnityEngine;
 /// </summary>
 public sealed class ModelFileExporterWindow : EditorWindow
 {
-    private const string OutputDirectoryPreference = "Cowart.EditorTools.ModelFileExporter.OutputDirectory";
-    private const string LegacyOutputDirectoryPreference = "JingGuan.ModelFileExporter.OutputDirectory";
+    private const string OutputDirectoryPreference = "Cowart.EditorUtilities.ModelFileExporter.OutputDirectory";
+    // 按优先级读取改名前保存的输出目录：Editor Tools 时期的键，以及更早的 JingGuan 键。
+    private static readonly string[] LegacyOutputDirectoryPreferences =
+    {
+        "Cowart.EditorTools.ModelFileExporter.OutputDirectory",
+        "JingGuan.ModelFileExporter.OutputDirectory"
+    };
     private const float PreviewSize = 56f;
     private const float RowHeight = 66f;
 
@@ -86,11 +91,17 @@ public sealed class ModelFileExporterWindow : EditorWindow
     {
         wantsMouseMove = true;
         string projectDirectory = Directory.GetParent(Application.dataPath)?.FullName ?? Application.dataPath;
-        outputDirectory = EditorPrefs.GetString(
-            OutputDirectoryPreference,
-            EditorPrefs.GetString(
-                LegacyOutputDirectoryPreference,
-                Path.Combine(projectDirectory, "ModelExports")));
+        string preferenceKey = OutputDirectoryPreference;
+        if (!EditorPrefs.HasKey(preferenceKey))
+        {
+            foreach (string legacyKey in LegacyOutputDirectoryPreferences)
+            {
+                if (!EditorPrefs.HasKey(legacyKey)) continue;
+                preferenceKey = legacyKey;
+                break;
+            }
+        }
+        outputDirectory = EditorPrefs.GetString(preferenceKey, Path.Combine(projectDirectory, "ModelExports"));
         RefreshModelFiles();
     }
 

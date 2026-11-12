@@ -1,4 +1,4 @@
-# Editor Tools
+# Editor Utilities
 
 面向 Unity 项目的纯编辑器工具包，提供资源检查、批处理、源码整理和运行时调试辅助功能。所有代码仅在 Unity Editor 中编译，不会进入 Player 构建。
 
@@ -85,19 +85,19 @@
 ```text
 Name: package.openupm.com
 URL: https://package.openupm.com
-Scope: com.cowart.editor-tools
+Scope: com.cowart.editor-utilities
 ```
 
 然后通过 `Add package by name` 安装：
 
 ```text
-com.cowart.editor-tools
+com.cowart.editor-utilities
 ```
 
 ### 通过 Git URL 安装
 
 ```text
-https://github.com/liuyan7669/unity-editor-tools.git#1.0.10
+https://github.com/liuyan7669/unity-editor-utilities.git#2.0.0
 ```
 
 ## 使用方法
@@ -205,3 +205,11 @@ Cowart > 项目开发工具
 ## 许可证
 
 本包使用 MIT License，详情参见仓库中的许可证文件。
+
+## 改名迁移（2.0.0）
+
+- 包标识：`com.cowart.editor-tools` → `com.cowart.editor-utilities`。
+- Git 仓库：`https://github.com/liuyan7669/unity-editor-tools.git` → `https://github.com/liuyan7669/unity-editor-utilities.git`；原有提交和旧 tag 保留。
+- 程序集、命名空间、示例和测试已同步使用新名称。业务项目需更新 manifest、asmdef 和 using；旧包与新包不可同时安装。
+- 资源 .meta GUID 保留；已改命名空间的运行时类型提供 MovedFrom 迁移标记。已有源码仍需按新命名空间修改。
+- 示例中的可选集成依赖保持可选，核心包不新增其他 Cowart 包依赖。

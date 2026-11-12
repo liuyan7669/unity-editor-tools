@@ -10,8 +10,13 @@ using PackageManagerPackageInfo = UnityEditor.PackageManager.PackageInfo;
 /// </summary>
 public sealed class SourceCodeExtractorWindow : EditorWindow
 {
-    private const string PreferencesPrefix = "Cowart.EditorTools.SourceCodeExtractor.";
-    private const string LegacyPreferencesPrefix = "JingGuan.SourceCodeExtractor.";
+    private const string PreferencesPrefix = "Cowart.EditorUtilities.SourceCodeExtractor.";
+    // 按优先级读取改名前保存的设置：Editor Tools 时期的键，以及更早的 JingGuan 键。
+    private static readonly string[] LegacyPreferencesPrefixes =
+    {
+        "Cowart.EditorTools.SourceCodeExtractor.",
+        "JingGuan.SourceCodeExtractor."
+    };
     private const string DefaultExtensions = ".cs;.shader;.compute;.cginc;.hlsl;.json;.xml;.uss;.uxml";
     private const string DefaultExcludedDirectories = "Library;Temp;Obj;obj;Logs;.git;.svn";
 
@@ -538,25 +543,28 @@ public sealed class SourceCodeExtractorWindow : EditorWindow
 
     private static string GetStringPreference(string key, string defaultValue)
     {
-        string preferenceKey = PreferencesPrefix + key;
-        return EditorPrefs.HasKey(preferenceKey)
-            ? EditorPrefs.GetString(preferenceKey, defaultValue)
-            : EditorPrefs.GetString(LegacyPreferencesPrefix + key, defaultValue);
+        return EditorPrefs.GetString(ResolvePreferenceKey(key), defaultValue);
     }
 
     private static bool GetBoolPreference(string key, bool defaultValue)
     {
-        string preferenceKey = PreferencesPrefix + key;
-        return EditorPrefs.HasKey(preferenceKey)
-            ? EditorPrefs.GetBool(preferenceKey, defaultValue)
-            : EditorPrefs.GetBool(LegacyPreferencesPrefix + key, defaultValue);
+        return EditorPrefs.GetBool(ResolvePreferenceKey(key), defaultValue);
     }
 
     private static int GetIntPreference(string key, int defaultValue)
     {
+        return EditorPrefs.GetInt(ResolvePreferenceKey(key), defaultValue);
+    }
+
+    /// <summary>返回当前键；当前键不存在时返回第一个存在的旧键，都不存在时仍返回当前键。</summary>
+    private static string ResolvePreferenceKey(string key)
+    {
         string preferenceKey = PreferencesPrefix + key;
-        return EditorPrefs.HasKey(preferenceKey)
-            ? EditorPrefs.GetInt(preferenceKey, defaultValue)
-            : EditorPrefs.GetInt(LegacyPreferencesPrefix + key, defaultValue);
+        if (EditorPrefs.HasKey(preferenceKey)) return preferenceKey;
+        foreach (string prefix in LegacyPreferencesPrefixes)
+        {
+            if (EditorPrefs.HasKey(prefix + key)) return prefix + key;
+        }
+        return preferenceKey;
     }
 }

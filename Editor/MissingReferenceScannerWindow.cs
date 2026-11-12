@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-namespace Cowart.EditorTools.Editor
+namespace Cowart.EditorUtilities.Editor
 {
     /// <summary>扫描已加载场景、Prefab 和 ScriptableObject 中的丢失脚本与对象引用。</summary>
     public sealed class MissingReferenceScannerWindow : EditorWindow
