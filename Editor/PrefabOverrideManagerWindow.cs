@@ -24,11 +24,18 @@ namespace Cowart.EditorUtilities.Editor
         private readonly List<PrefabEntry> entries = new List<PrefabEntry>();
         private Vector2 scrollPosition;
 
-        [MenuItem("Cowart/项目开发工具/Prefab Override 管理")]
+        [MenuItem("Cowart/场景/Prefab 覆盖管理")]
         private static void Open()
         {
-            GetWindow<PrefabOverrideManagerWindow>("Prefab Override").minSize = new Vector2(700f, 420f);
+            GetWindow<PrefabOverrideManagerWindow>("Prefab 覆盖管理").minSize = new Vector2(700f, 420f);
         }
+
+        [MenuItem("GameObject/Cowart/场景/Prefab 覆盖管理", false, -10000)]
+        private static void OpenForSelection() => Open();
+
+        [MenuItem("GameObject/Cowart/场景/Prefab 覆盖管理", true)]
+        private static bool ValidateSelection() => Selection.gameObjects.Any(
+            item => !EditorUtility.IsPersistent(item) && PrefabUtility.IsPartOfPrefabInstance(item));
 
         private void OnEnable()
         {

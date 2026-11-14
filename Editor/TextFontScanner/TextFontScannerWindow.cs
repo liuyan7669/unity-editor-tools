@@ -49,11 +49,11 @@ public sealed class TextFontScannerWindow : EditorWindow
         public string SelectionKey;
     }
 
-    [MenuItem("Cowart/项目开发工具/UI 字体管理")]
+    [MenuItem("Cowart/UI/字体检查与替换")]
     private static void OpenWindow()
     {
         TextFontScannerWindow window = GetWindow<TextFontScannerWindow>();
-        window.titleContent = new GUIContent("Text 字体检查");
+        window.titleContent = new GUIContent("字体检查与替换");
         window.minSize = new Vector2(780f, 420f);
         window.Show();
     }

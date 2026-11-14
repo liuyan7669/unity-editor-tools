@@ -24,11 +24,26 @@ namespace Cowart.EditorUtilities.Editor
         private readonly List<string> results = new List<string>();
         private string status = "请选择 Project 中的资源。";
 
-        [MenuItem("Cowart/项目开发工具/引用查找")]
+        [MenuItem("Cowart/资源/引用查找")]
         private static void Open()
         {
             GetWindow<ReferenceFinderWindow>("引用查找").minSize = new Vector2(620f, 420f);
         }
+
+        [MenuItem("Assets/Cowart/资源/引用查找", false, 20)]
+        private static void OpenForAsset()
+        {
+            Open();
+            var window = GetWindow<ReferenceFinderWindow>();
+            window.target = Selection.activeObject;
+            window.results.Clear();
+            window.status = "已切换目标，请开始查找。";
+            window.Repaint();
+        }
+
+        [MenuItem("Assets/Cowart/资源/引用查找", true)]
+        private static bool ValidateAsset() => Selection.activeObject != null &&
+            !string.IsNullOrEmpty(AssetDatabase.GetAssetPath(Selection.activeObject));
 
         private void OnEnable()
         {

@@ -3,7 +3,9 @@
   "rootNamespace": "Cowart.EditorUtilities.Editor",
   "references": [
     "Unity.TextMeshPro",
-    "UnityEngine.UI"
+    "UnityEngine.UI",
+    "Cowart.InspectorGroups.Editor",
+    "Cowart.InspectorGroups"
   ],
   "includePlatforms": [
     "Editor"

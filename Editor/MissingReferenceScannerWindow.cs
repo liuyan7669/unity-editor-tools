@@ -40,7 +40,7 @@ namespace Cowart.EditorUtilities.Editor
         private readonly List<ScanIssue> issues = new List<ScanIssue>();
         private string status = "尚未扫描。";
 
-        [MenuItem("Cowart/项目开发工具/丢失引用扫描")]
+        [MenuItem("Cowart/场景/丢失引用扫描")]
         private static void Open()
         {
             GetWindow<MissingReferenceScannerWindow>("丢失引用扫描").minSize = new Vector2(760f, 460f);

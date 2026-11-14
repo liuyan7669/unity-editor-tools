@@ -78,13 +78,37 @@ public sealed class ModelFileExporterWindow : EditorWindow
         }
     }
 
-    [MenuItem("Cowart/项目开发工具/模型导出")]
+    [MenuItem("Cowart/资源/模型文件导出")]
     private static void OpenWindow()
     {
         ModelFileExporterWindow window = GetWindow<ModelFileExporterWindow>();
         window.titleContent = new GUIContent("模型导出");
         window.minSize = new Vector2(620f, 420f);
         window.Show();
+    }
+
+    [MenuItem("Assets/Cowart/资源/模型文件导出", false, 20)]
+    private static void OpenForSelection()
+    {
+        OpenWindow();
+        var window = GetWindow<ModelFileExporterWindow>();
+        window.searchText = string.Empty;
+        window.selectedPaths.Clear();
+        foreach (var item in Selection.objects)
+        {
+            string path = AssetDatabase.GetAssetPath(item);
+            if (AssetImporter.GetAtPath(path) is ModelImporter)
+                window.selectedPaths.Add(path);
+        }
+        window.Repaint();
+    }
+
+    [MenuItem("Assets/Cowart/资源/模型文件导出", true)]
+    private static bool ValidateSelection()
+    {
+        foreach (var item in Selection.objects)
+            if (AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(item)) is ModelImporter) return true;
+        return false;
     }
 
     private void OnEnable()

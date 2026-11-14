@@ -27,11 +27,44 @@ namespace Cowart.EditorUtilities.Editor
         private int previewSlots;
         private string previewStatus = "尚未扫描。";
 
-        [MenuItem("Cowart/项目开发工具/材质批量替换")]
+        [MenuItem("Cowart/资源/材质批量替换")]
         private static void Open()
         {
             GetWindow<MaterialReplacerWindow>("材质批量替换").minSize = new Vector2(520f, 360f);
         }
+
+        [MenuItem("GameObject/Cowart/资源/材质批量替换", false, -10000)]
+        private static void OpenForHierarchy()
+        {
+            Open();
+            var window = GetWindow<MaterialReplacerWindow>();
+            window.scope = ReplaceScope.SelectedHierarchy;
+            window.previewRenderers = 0;
+            window.previewSlots = 0;
+            window.previewStatus = "尚未扫描。";
+        }
+
+        [MenuItem("GameObject/Cowart/资源/材质批量替换", true)]
+        private static bool ValidateHierarchy() => Selection.gameObjects.Any(
+            item => !EditorUtility.IsPersistent(item) && item.scene.IsValid());
+
+        [MenuItem("Assets/Cowart/资源/材质批量替换", false, 20)]
+        private static void OpenForAsset()
+        {
+            Open();
+            var window = GetWindow<MaterialReplacerWindow>();
+            window.scope = ReplaceScope.ProjectPrefabs;
+            window.sourceMaterial = Selection.activeObject as Material;
+            window.projectFolder = AssetDatabase.IsValidFolder(AssetDatabase.GetAssetPath(Selection.activeObject))
+                ? Selection.activeObject as DefaultAsset : null;
+            window.previewRenderers = 0;
+            window.previewSlots = 0;
+            window.previewStatus = "尚未扫描。";
+        }
+
+        [MenuItem("Assets/Cowart/资源/材质批量替换", true)]
+        private static bool ValidateAsset() => Selection.activeObject is Material ||
+            AssetDatabase.IsValidFolder(AssetDatabase.GetAssetPath(Selection.activeObject));
 
         private void OnGUI()
         {

@@ -11,12 +11,12 @@ using Object = UnityEngine.Object;
 /// </summary>
 public static class ComponentClipboardMenu
 {
-    private const string ComponentCopyMenu = "Cowart/组件/复制";
-    private const string ComponentCutMenu = "Cowart/组件/剪切";
-    private const string ComponentPasteMenu = "Cowart/组件/粘贴";
-    private const string GameObjectCopyMenu = "GameObject/Cowart/组件/复制";
-    private const string GameObjectCutMenu = "GameObject/Cowart/组件/剪切";
-    private const string GameObjectPasteMenu = "GameObject/Cowart/组件/粘贴";
+    private const string ComponentCopyMenu = "Cowart/物体/组件/复制全部组件";
+    private const string ComponentCutMenu = "Cowart/物体/组件/剪切全部组件";
+    private const string ComponentPasteMenu = "Cowart/物体/组件/粘贴全部组件";
+    private const string GameObjectCopyMenu = "GameObject/Cowart/物体/组件/复制全部组件";
+    private const string GameObjectCutMenu = "GameObject/Cowart/物体/组件/剪切全部组件";
+    private const string GameObjectPasteMenu = "GameObject/Cowart/物体/组件/粘贴全部组件";
     private const int MenuGroupPriority = 0;
 
     private static ComponentClipboardState clipboard;
@@ -66,7 +66,7 @@ public static class ComponentClipboardMenu
     }
 
     /// <summary>从 Hierarchy 物体右键菜单复制全部组件。</summary>
-    [MenuItem(GameObjectCopyMenu, false, MenuGroupPriority)]
+    [MenuItem(GameObjectCopyMenu, false, -10000)]
     private static void CopyFromGameObjectMenu(MenuCommand menuCommand)
     {
         Capture(GetContextGameObject(menuCommand), false);
@@ -80,7 +80,7 @@ public static class ComponentClipboardMenu
     }
 
     /// <summary>从 Hierarchy 物体右键菜单剪切全部组件。</summary>
-    [MenuItem(GameObjectCutMenu, false, MenuGroupPriority + 1)]
+    [MenuItem(GameObjectCutMenu, false, -10000)]
     private static void CutFromGameObjectMenu(MenuCommand menuCommand)
     {
         Capture(GetContextGameObject(menuCommand), true);
@@ -94,7 +94,7 @@ public static class ComponentClipboardMenu
     }
 
     /// <summary>从 Hierarchy 物体右键菜单粘贴到全部选中物体。</summary>
-    [MenuItem(GameObjectPasteMenu, false, MenuGroupPriority + 2)]
+    [MenuItem(GameObjectPasteMenu, false, -10000)]
     private static void PasteFromGameObjectMenu(MenuCommand menuCommand)
     {
         Paste(GetPasteTargets(GetContextGameObject(menuCommand)));

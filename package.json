@@ -1,6 +1,6 @@
 {
   "name": "com.cowart.editor-utilities",
-  "version": "2.0.0",
+  "version": "3.1.0",
   "displayName": "Editor Utilities",
   "description": "Unity 编辑器工具集，提供引用与场景诊断、Prefab 管理、选择收藏、材质替换、组件剪贴板及资源批处理。",
   "unity": "2021.3",
@@ -15,7 +15,8 @@
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.2",
     "com.unity.textmeshpro": "3.0.6",
-    "com.unity.ugui": "1.0.0"
+    "com.unity.ugui": "1.0.0",
+    "com.cowart.inspector-groups": "3.1.0"
   },
   "keywords": [
     "editor",

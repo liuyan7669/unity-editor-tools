@@ -30,10 +30,10 @@ namespace Cowart.EditorUtilities.Editor
         private Vector2 scrollPosition;
         private string status = "尚未检查。";
 
-        [MenuItem("Cowart/项目开发工具/场景体检")]
+        [MenuItem("Cowart/场景/场景检查")]
         private static void Open()
         {
-            GetWindow<SceneValidationWindow>("场景体检").minSize = new Vector2(700f, 440f);
+            GetWindow<SceneValidationWindow>("场景检查").minSize = new Vector2(700f, 440f);
         }
 
         private void OnGUI()

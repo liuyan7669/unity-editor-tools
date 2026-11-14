@@ -134,13 +134,42 @@ public sealed class TextureCompressionWindow : EditorWindow
         public bool IsGroupHeader => TextureAsset == null;
     }
 
-    [MenuItem("Cowart/项目开发工具/纹理压缩")]
+    [MenuItem("Cowart/资源/纹理压缩")]
     private static void OpenWindow()
     {
         TextureCompressionWindow window = GetWindow<TextureCompressionWindow>();
-        window.titleContent = new GUIContent("贴图压缩");
+        window.titleContent = new GUIContent("纹理压缩");
         window.minSize = new Vector2(900f, 500f);
         window.Show();
+    }
+
+    [MenuItem("Assets/Cowart/资源/纹理压缩", false, 20)]
+    private static void OpenForSelection()
+    {
+        OpenWindow();
+        var window = GetWindow<TextureCompressionWindow>();
+        window.searchText = string.Empty;
+        window.showReadableOnly = false;
+        window.showUncompressedOnly = false;
+        window.selectedTextureTypeMask = (1 << TextureTypes.Length) - 1;
+        window.groupFoldoutStates.Clear();
+        window.isVisibleListDirty = true;
+        window.selectedPaths.Clear();
+        foreach (var item in Selection.objects)
+        {
+            string path = AssetDatabase.GetAssetPath(item);
+            if (AssetImporter.GetAtPath(path) is TextureImporter)
+                window.selectedPaths.Add(path);
+        }
+        window.Repaint();
+    }
+
+    [MenuItem("Assets/Cowart/资源/纹理压缩", true)]
+    private static bool ValidateSelection()
+    {
+        foreach (var item in Selection.objects)
+            if (AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(item)) is TextureImporter) return true;
+        return false;
     }
 
     private void OnEnable()
@@ -172,7 +201,7 @@ public sealed class TextureCompressionWindow : EditorWindow
     private void DrawToolbar()
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar, GUILayout.Height(24f));
-        GUILayout.Label("贴图压缩", EditorStyles.boldLabel, GUILayout.Width(70f));
+        GUILayout.Label("纹理压缩", EditorStyles.boldLabel, GUILayout.Width(70f));
         GUILayout.FlexibleSpace();
 
         GUIStyle searchStyle = GUI.skin.FindStyle("ToolbarSearchTextField")

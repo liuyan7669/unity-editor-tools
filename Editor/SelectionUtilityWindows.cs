@@ -129,7 +129,7 @@ namespace Cowart.EditorUtilities.Editor
         private Vector2 historyScroll;
         private Vector2 bookmarkScroll;
 
-        [MenuItem("Cowart/项目开发工具/选择历史与收藏")]
+        [MenuItem("Cowart/项目/选择历史与收藏")]
         private static void Open()
         {
             GetWindow<SelectionHistoryWindow>("选择历史与收藏").minSize = new Vector2(560f, 430f);
@@ -219,7 +219,9 @@ namespace Cowart.EditorUtilities.Editor
     {
         private Object target;
 
-        [MenuItem("Cowart/项目开发工具/复制资源信息")]
+        [MenuItem("Cowart/项目/查看与复制对象信息")]
+        [MenuItem("Assets/Cowart/项目/查看与复制对象信息", false, 20)]
+        [MenuItem("GameObject/Cowart/项目/查看与复制对象信息", false, -10000)]
         private static void Open()
         {
             GetWindow<AssetInfoWindow>("资源信息").minSize = new Vector2(620f, 330f);
